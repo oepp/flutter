@@ -8,6 +8,7 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           TextFormField(
             decoration: InputDecoration(labelText: 'username'),
