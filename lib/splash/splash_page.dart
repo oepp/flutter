@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oepp/login/login_page.dart';
+import 'package:oepp/login/login.dart';
 
 class SplashPage extends StatelessWidget {
   @override
