@@ -6,20 +6,32 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          TextFormField(
-            decoration: InputDecoration(labelText: 'username'),
-            controller: _usernameController,
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'password'),
-            controller: _passwordController,
-            obscureText: true,
-          ),
-        ],
+    return Scaffold(
+      body: Container(
+          padding: EdgeInsets.all(15.0),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: TextField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                        labelText: 'Username'
+                    ),
+                  ),
+                ),
+                Container(
+                  child: TextField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                        labelText: 'Password'
+                    ),
+                    obscureText: true,
+                  ),
+                )
+              ],
+            ),
+          )
       ),
     );
   }
