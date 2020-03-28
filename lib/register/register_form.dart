@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oepp/authentication/authentication_bloc.dart';
 import 'package:oepp/authentication/authentication_event.dart';
-import 'package:oepp/register/register.dart';
 
-class LoginForm extends StatelessWidget {
+class RegisterForm extends StatelessWidget {
   final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
@@ -26,6 +26,15 @@ class LoginForm extends StatelessWidget {
                 ),
                 Container(
                   child: TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                        labelText: 'e-mail'
+                    ),
+                    obscureText: true,
+                  ),
+                ),
+                Container(
+                  child: TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
                         labelText: 'Password'
@@ -34,20 +43,11 @@ class LoginForm extends StatelessWidget {
                   ),
                 ),
           RaisedButton(
-            child: Text('Login'),
+            child: Text('Register'),
             onPressed: () {
-              BlocProvider.of<AuthenticationBloc>(context).add(OnLogin());
+              Navigator.pop(context);
             },
-          ),
-                RaisedButton(
-                  child: Text('Register'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
-                    );
-                  },
-                )
+          )
               ],
             ),
           )
