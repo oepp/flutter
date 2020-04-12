@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oepp/core/core.dart';
+import 'package:oepp/home/home_page.dart';
 import 'package:oepp/register/register_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -16,6 +17,9 @@ class LoginPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
                       children: <Widget>[
+                        SizedBox(
+                          height: 30,
+                        ),
                         Container(
                             width: 200.0,
                             height: 200.0,
@@ -101,7 +105,7 @@ class LoginPage extends StatelessWidget {
                                 side: BorderSide(color: ColorPalette.amethyst)),
                             onPressed: () {
                               Navigator.push(context,
-                                  PageTransition(widget: RegisterPage()));
+                                  PageTransition(widget: HomePage()));
                             },
                             color: ColorPalette.amethyst,
                             textColor: ColorPalette.clouds,
@@ -122,6 +126,9 @@ class LoginPage extends StatelessWidget {
                               style: TextStyle(
                                 color: ColorPalette.amethyst,
                               )),
+                        ),
+                        SizedBox(
+                          height: 30,
                         )
                       ],
                     )))));
