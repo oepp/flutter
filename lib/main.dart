@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oepp/splash/splash.dart';
+import 'package:oepp/pages/splash_page.dart';
 
 void main() => runApp(App());
 

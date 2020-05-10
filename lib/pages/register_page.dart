@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oepp/core/core.dart';
 import 'package:oepp/pages/login_page.dart';
+import 'package:oepp/utilities/page_transition.dart';
 import 'package:oepp/widgets/form_button.dart';
 import 'package:oepp/widgets/form_input_container.dart';
 import 'package:oepp/widgets/form_input_field.dart';

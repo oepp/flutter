@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:oepp/core/page_transition.dart';
-import 'package:oepp/home/home_page.dart';
+import 'package:oepp/utilities/page_transition.dart';
 import 'package:oepp/pages/register_page.dart';
+import 'package:oepp/pages/home_page.dart';
 import 'package:oepp/widgets/form_button.dart';
 import 'package:oepp/widgets/form_ink_well.dart';
 import 'package:oepp/widgets/form_input_container.dart';
