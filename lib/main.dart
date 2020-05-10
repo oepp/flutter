@@ -1,22 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oepp/services/user_service.dart';
-import 'package:oepp/splash/splash.dart';
-import 'authentication/authentication';
+import 'package:oepp/pages/splash_page.dart';
 
-void main() {
-  final userService = UserService();
-
-  runApp(
-    BlocProvider<AuthenticationBloc>(
-      create: (context) {
-        return AuthenticationBloc(userService)
-          ..add(OnInitialize());
-      },
-      child: App(),
-    ),
-  );
-}
+void main() => runApp(App());
 
 class App extends StatelessWidget {
   Widget build(BuildContext context) {
