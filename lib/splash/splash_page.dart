@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oepp/authentication/authentication';
 import 'package:oepp/core/core.dart';
 import 'package:oepp/home/home_page.dart';
-import 'package:oepp/login/login.dart';
+import 'package:oepp/pages/login_page.dart';
 
 class SplashPage extends StatelessWidget {
   @override
