@@ -1,7 +1,7 @@
 import 'package:oepp/models/question_item.dart';
 
 class QuestionLine {
-  List<QuestionItem> items;
+  final List<QuestionItem> items;
 
   QuestionLine(this.items);
 

@@ -4,13 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'game_type.dart';
 
 class GameInfo {
-  int id;
-  GameType type;
-  String title;
-  String description;
-  Image image;
-  String creator;
-  String creationTime;
+  final int id;
+  final GameType type;
+  final String title;
+  final String description;
+  final Image image;
+  final String creator;
+  final String creationTime;
 
   GameInfo(this.id, this.type, this.title, this.description, this.image,
       this.creator, this.creationTime);

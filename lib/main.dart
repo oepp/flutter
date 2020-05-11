@@ -5,8 +5,6 @@ void main() => runApp(App());
 
 class App extends StatelessWidget {
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SplashPage()
-    );
+    return MaterialApp(home: SplashPage());
   }
 }

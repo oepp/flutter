@@ -1,8 +1,8 @@
 import 'package:oepp/models/question_line.dart';
 
 class Question {
-  String description;
-  List<QuestionLine> lines;
+  final String description;
+  final List<QuestionLine> lines;
 
   Question(this.description, this.lines);
 
