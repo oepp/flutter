@@ -45,11 +45,11 @@ class UserService {
     return (jsonDecode(response.body)["status"] == "success");
   }
 
-  Future<bool> confirmPassword(String resetCode, String password, String confirmpassword) async {
+  Future<bool> resetPassword(String resetCode, String password, String confirmPassword) async {
     Map<String, dynamic> body() => {
       "resetCode": resetCode,
       "password": password,
-      "confirmpassword": confirmpassword
+      "confirmpassword": confirmPassword
     };
 
     var response = await http.post(url + "forgot/confirm/password", headers: headers, body: json.encode(body()));
