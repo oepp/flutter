@@ -1,26 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:oepp/pages/forgot_password_page.dart';
+import 'package:oepp/pages/login_page.dart';
 import 'package:oepp/services/user_service.dart';
 import 'package:oepp/utilities/alert_utlity.dart';
+import 'package:oepp/utilities/color_palette.dart';
 import 'package:oepp/utilities/page_transition.dart';
-import 'package:oepp/pages/register_page.dart';
-import 'package:oepp/pages/home_page.dart';
 import 'package:oepp/widgets/form_button.dart';
-import 'package:oepp/widgets/form_ink_well.dart';
 import 'package:oepp/widgets/form_input_container.dart';
 import 'package:oepp/widgets/form_input_field.dart';
 import 'package:oepp/widgets/form_space.dart';
 import 'package:oepp/widgets/oepp_logo.dart';
 
-class LoginPage extends StatelessWidget {
-  final _usernameController = TextEditingController();
+class ResetPasswordPage extends StatelessWidget {
+  final _recoveryCodeController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+            title: Text("Reset Password"),
+            backgroundColor: ColorPalette.amethyst),
         backgroundColor: Colors.white,
         body: Center(
             child: SingleChildScrollView(
@@ -32,38 +33,27 @@ class LoginPage extends StatelessWidget {
                         OeppLogo(),
                         FormSpace(),
                         FormInputContainer(<Widget>[
-                          FormInputField(_usernameController, "Username", false),
-                          FormInputField(_passwordController, "Password", true)
+                          FormInputField(_recoveryCodeController, "Recovery Code", false),
+                          FormInputField(_passwordController, "Password", true),
+                          FormInputField(_confirmPasswordController, "Confirm Password", true)
                         ]),
-                        FormSpace(),
-                        FormInkWell("Forgot Password?", () {
-                          Navigator.push(context,
-                              PageTransition(widget: ForgotPasswordPage()));
-                        }),
                         FormSpace(),
                         Builder(
                             builder: (context) =>
-                                FormButton("Login", () {
+                                FormButton("Reset Password", () {
                                   GetIt.instance<UserService>()
-                                      .login(
-                                      _usernameController.text,
-                                      _passwordController.text)
+                                      .resetPassword(_recoveryCodeController.text, _passwordController.text, _confirmPasswordController.text)
                                       .then((success) {
                                     if (success) {
                                       AlertUtility.success(context);
                                       Navigator.push(context,
-                                          PageTransition(widget: HomePage()));
+                                          PageTransition(widget: LoginPage()));
                                     } else {
                                       AlertUtility.error(context);
                                     }
                                   });
                                   //
                                 })),
-                        FormSpace(),
-                        FormInkWell("Create Account", () {
-                          Navigator.push(context,
-                              PageTransition(widget: RegisterPage()));
-                        }),
                         FormSpace()
                       ],
                     )))));
