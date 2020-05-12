@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:oepp/pages/login_page.dart';
 import 'package:oepp/services/user_service.dart';
+import 'package:oepp/utilities/alert_utlity.dart';
 import 'package:oepp/utilities/page_transition.dart';
 import 'package:oepp/widgets/form_button.dart';
 import 'package:oepp/widgets/form_input_container.dart';
 import 'package:oepp/widgets/form_input_field.dart';
 import 'package:oepp/widgets/form_space.dart';
 import 'package:oepp/widgets/oepp_logo.dart';
-import '../main.dart';
 
 class RegisterPage extends StatelessWidget {
   final _usernameController = TextEditingController();
@@ -19,6 +19,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(title: Text("Create Account")),
         backgroundColor: Colors.white,
         body: Center(
             child: SingleChildScrollView(
@@ -38,20 +39,25 @@ class RegisterPage extends StatelessWidget {
                               "Confirm Password", true)
                         ]),
                         FormSpace(),
-                        FormButton("Create Account", () {
-                          getIt<UserService>().register(_usernameController.text, _emailController.text, _passwordController.text).then((result) {
-                            //Create snackbar
-                            if (result.body[0] == "success")
-                            {
-                              print("Done!");
-                              print('response.body '+ result.body);
-                              Navigator.push(context, PageTransition(widget: LoginPage()));
-                            }
-
-                            print("result:" + result.toString());
-                          });
-                          //
-                        }),
+                        Builder(
+                            builder: (context) =>
+                                FormButton("Create Account", () {
+                                  GetIt.instance<UserService>()
+                                      .register(
+                                          _usernameController.text,
+                                          _emailController.text,
+                                          _passwordController.text)
+                                      .then((success) {
+                                    if (success) {
+                                      AlertUtility.success(context);
+                                      Navigator.push(context,
+                                          PageTransition(widget: LoginPage()));
+                                    } else {
+                                      AlertUtility.error(context);
+                                    }
+                                  });
+                                  //
+                                })),
                         FormSpace()
                       ],
                     )))));

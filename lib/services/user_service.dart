@@ -9,7 +9,7 @@ class UserService {
     'Content-Type': 'application/json'
   };
 
-  Future<http.Response> register(String username, String email, String password) async {
+  Future<bool> register(String username, String email, String password) async {
     Map<String, dynamic> body() => {
       "name": "Null",
       "surname": "Null",
@@ -19,9 +19,8 @@ class UserService {
     };
 
     var response = await http.post(url, headers: headers, body: json.encode(body()));
-    print('Response status: ${response.statusCode}');
 
-    return response;
+    return (jsonDecode(response.body)["status"] == "success");
   }
 
   Future<void> deleteToken() async {
