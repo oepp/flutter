@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:oepp/pages/forgot_password_page.dart';
 import 'package:oepp/services/user_service.dart';
 import 'package:oepp/utilities/alert_utlity.dart';
 import 'package:oepp/utilities/page_transition.dart';
@@ -37,7 +38,7 @@ class LoginPage extends StatelessWidget {
                         FormSpace(),
                         FormInkWell("Forgot Password?", () {
                           Navigator.push(context,
-                              PageTransition(widget: RegisterPage()));
+                              PageTransition(widget: ForgotPasswordPage()));
                         }),
                         FormSpace(),
                         Builder(
