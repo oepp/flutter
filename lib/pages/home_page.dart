@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return FutureBuilder<List<GameInfo>>(
-      future: _gameService.getPopularGames(),
+      future: _gameService.getPopularGameInfos(),
       // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<List<GameInfo>> snapshot) {
         List<Widget> children;
