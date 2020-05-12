@@ -12,6 +12,8 @@ import 'package:oepp/widgets/form_space.dart';
 import 'package:oepp/widgets/oepp_logo.dart';
 
 class RegisterPage extends StatelessWidget {
+  final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -21,8 +23,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Register"),
-            backgroundColor: ColorPalette.amethyst),
+            title: Text("Register"), backgroundColor: ColorPalette.amethyst),
         backgroundColor: Colors.white,
         body: Center(
             child: SingleChildScrollView(
@@ -49,7 +50,8 @@ class RegisterPage extends StatelessWidget {
                                       .register(
                                           _usernameController.text,
                                           _emailController.text,
-                                          _passwordController.text)
+                                          _passwordController.text,
+                                          _confirmPasswordController.text)
                                       .then((success) {
                                     if (success) {
                                       AlertUtility.success(context);

@@ -9,13 +9,14 @@ class UserService {
     'Content-Type': 'application/json'
   };
 
-  Future<bool> register(String username, String email, String password) async {
+  Future<bool> register(String username, String email, String password, String confirmPassword) async {
     Map<String, dynamic> body() => {
       "name": "Null",
       "surname": "Null",
       "username": username,
       "email": email,
-      "password": password
+      "password": password,
+      "confirmpassword" : confirmPassword
     };
 
     var response = await http.post(url + "register", headers: headers, body: json.encode(body()));
