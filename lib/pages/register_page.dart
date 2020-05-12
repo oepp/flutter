@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:oepp/pages/login_page.dart';
 import 'package:oepp/services/user_service.dart';
 import 'package:oepp/utilities/alert_utlity.dart';
+import 'package:oepp/utilities/color_palette.dart';
 import 'package:oepp/utilities/page_transition.dart';
 import 'package:oepp/widgets/form_button.dart';
 import 'package:oepp/widgets/form_input_container.dart';
@@ -19,7 +20,9 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Create Account")),
+        appBar: AppBar(
+            title: Text("Register"),
+            backgroundColor: ColorPalette.amethyst),
         backgroundColor: Colors.white,
         body: Center(
             child: SingleChildScrollView(
