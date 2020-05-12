@@ -1,14 +1,24 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class UserService {
+  static const url =
+      "http://192.168.1.101:3001/user/register";
+  static const headers = {
+    'Content-Type': 'application/json'
+  };
+
   Future<http.Response> register(String username, String email, String password) async {
-    Map<String, dynamic> post = new Map<String, dynamic>();
-    post["username"] = username;
-    post["email"] = username;
-    post["password"] = password;
-    const String url = "http://localhost:3001/user/register";
-    var response = await http.post(url, body: post);
+    Map<String, dynamic> body() => {
+      "name": "Null",
+      "surname": "Null",
+      "username": username,
+      "email": email,
+      "password": password
+    };
+
+    var response = await http.post(url, headers: headers, body: json.encode(body()));
     print('Response status: ${response.statusCode}');
 
     return response;
