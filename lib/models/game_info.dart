@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:oepp/utilities/image_utility.dart';
 import 'game_type.dart';
 
 class GameInfo {
@@ -16,11 +16,11 @@ class GameInfo {
       this.creator, this.creationTime);
 
   GameInfo.fromJson(Map<String, dynamic> data)
-      : id = data['id'],
-        type = data['gameType'],
-        title = data['title'],
-        description = data['description'],
-        image = Image.memory(base64Decode(data['image'])),
-        creator = data['creator'],
-        creationTime = data['creationTime'];
+      : id = data['idGames'],
+        type = GameType.fillInBlanks,
+        title = data['GameTitle'],
+        description = data['GameDescription'],
+        image = ImageUtility.fromJson(data['GameImage']),
+        creator = data['username'],
+        creationTime = data['ReleaseTime'];
 }
