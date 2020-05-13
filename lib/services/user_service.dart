@@ -20,29 +20,29 @@ class UserService {
           "confirmpassword": confirmPassword
         };
 
-    return _apiService.post("/user/register", body());
+    return await _apiService.post("user/register", body());
   }
 
   Future<bool> login(String username, String password) async {
     Map<String, dynamic> body() => {"username": username, "password": password};
 
-    return _apiService.post("/user/login", body());
+    return await _apiService.post("user/login", body());
   }
 
   Future<bool> forgotPassword(String email) async {
     Map<String, dynamic> body() => {"email": email};
 
-    return _apiService.post("/user/forgot/password", body());
+    return await _apiService.post("user/forgot/password", body());
   }
 
   Future<bool> resetPassword(
       String resetCode, String password, String confirmPassword) async {
     Map<String, dynamic> body() => {
-          "resetCode": resetCode,
+          "passwordResetCode": resetCode,
           "password": password,
           "confirmpassword": confirmPassword
         };
 
-    return _apiService.post("/user/forgot/confirm/password", body());
+    return await _apiService.post("user/forgot/confirm/password", body());
   }
 }

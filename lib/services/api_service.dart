@@ -12,9 +12,9 @@ class ApiService {
     return (jsonDecode(response.body)["status"] == "success");
   }
 
-  Future<http.Response> get(String path) async {
+  Future<Map<String, dynamic>> get(String path) async {
     var response = await http.get(_url + path, headers: _headers);
 
-    return response;
+    return jsonDecode(response.body);
   }
 }

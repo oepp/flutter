@@ -8,12 +8,8 @@ import 'package:oepp/services/user_service.dart';
 
 void _setup() {
   GetIt.instance.registerSingleton<ApiService>(ApiService());
-  GetIt.instance.registerSingletonWithDependencies<UserService>(
-      () => UserService(),
-      dependsOn: [ApiService]);
-  GetIt.instance.registerSingletonWithDependencies<GameService>(
-      () => GameService(),
-      dependsOn: [ApiService]);
+  GetIt.instance.registerSingleton<UserService>(UserService());
+  GetIt.instance.registerSingleton<GameService>(GameService());
 }
 
 void main() {
