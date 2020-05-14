@@ -17,7 +17,7 @@ class GameInfoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Text("Game Info"), backgroundColor: ColorPalette.greenSea),
-      backgroundColor: Colors.white,
+      backgroundColor: ColorPalette.clouds,
       body: Column(
         children: <Widget>[
           Container(

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:oepp/utilities/alert_utlity.dart';
 import 'package:oepp/utilities/color_palette.dart';
 import 'package:oepp/models/game_info.dart';
 import 'package:oepp/services/game_service.dart';
 import 'package:oepp/widgets/game_info_card.dart';
+import 'package:oepp/widgets/loading_indicator.dart';
 
 class HomePage extends StatelessWidget {
   final GameService _gameService = new GameService();
@@ -11,80 +13,37 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<List<GameInfo>>(
       future: _gameService.getPopularGameInfos(),
-      // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<List<GameInfo>> snapshot) {
         List<Widget> children;
 
         if (snapshot.hasData) {
           children = <Widget>[
             Container(
+                margin: EdgeInsets.only(bottom: 25, right: 5, left: 5),
                 width: double.infinity,
-                height: 100.0,
-                color: ColorPalette.amethyst,
+                height: 75.0,
+                color: ColorPalette.greenSea,
                 child: Center(
                     child: Text(
                   "Popular Games",
                   style: TextStyle(fontSize: 36, color: ColorPalette.clouds),
                 ))),
-            SizedBox(
-              height: 20,
-            ),
             Expanded(
                 child: GridView.count(
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              children: snapshot.data
-                  .map((item) => GameInfoCard(item))
-                  .toList(),
+              children:
+                  snapshot.data.map((item) => GameInfoCard(item)).toList(),
             ))
           ];
         } else if (snapshot.hasError) {
-          children = <Widget>[
-            Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text('Error: ${snapshot.error}'),
-            )
-          ];
+          AlertUtility.error(context);
         } else {
-          children = <Widget>[
-            SizedBox(
-              child: CircularProgressIndicator(),
-              width: 60,
-              height: 60,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 16),
-              child: Text('Awaiting result...'),
-            )
-          ];
+          children = <Widget>[LoadingIndicator()];
         }
         return Scaffold(
-          backgroundColor: Colors.grey[600],
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Icon(Icons.menu),
-            title: Text("Home"),
-            actions: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Container(
-                  width: 36,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[800],
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(child: Text("0")),
-                ),
-              )
-            ],
-          ),
+          backgroundColor: ColorPalette.clouds,
           body: SafeArea(
             child: Container(
               padding: EdgeInsets.all(20.0),

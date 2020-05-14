@@ -17,7 +17,7 @@ class FormInputField extends StatelessWidget {
             border: Border(bottom: BorderSide(color: ColorPalette.clouds))),
         child: TextField(
           controller: _controller,
-          cursorColor: ColorPalette.amethyst,
+          cursorColor: ColorPalette.greenSea,
           style: TextStyle(
             color: ColorPalette.wetAsphalt,
           ),

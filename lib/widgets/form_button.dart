@@ -17,7 +17,7 @@ class FormButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0)),
         onPressed: _onPressed,
-        color: ColorPalette.amethyst,
+        color: ColorPalette.greenSea,
         textColor: ColorPalette.clouds,
         child: Text(_text),
       ),

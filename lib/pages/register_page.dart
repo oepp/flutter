@@ -23,8 +23,8 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Register"), backgroundColor: ColorPalette.amethyst),
-        backgroundColor: Colors.white,
+            title: Text("Register"), backgroundColor: ColorPalette.greenSea),
+        backgroundColor: ColorPalette.clouds,
         body: Center(
             child: SingleChildScrollView(
                 child: Padding(
