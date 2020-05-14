@@ -6,5 +6,16 @@ class Game {
   Game(this.questions);
 
   Game.fromJson(Map<String, dynamic> data)
-      : questions = data['questions'].map((i) => Question.fromJson(i)).toList();
+      : questions = _questionsFromJson(data);
+
+  static List<Question> _questionsFromJson(Map<String, dynamic> data)
+  {
+    List<Question> list = new List<Question>();
+    for (var json in data['questions']){
+      var question = Question.fromJson(json);
+      list.add(question);
+    }
+
+    return list;
+  }
 }

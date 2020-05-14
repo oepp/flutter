@@ -8,5 +8,16 @@ class Question {
 
   Question.fromJson(Map<String, dynamic> data)
       : description = data['description'],
-        lines = data['lines'].map((i) => QuestionLine.fromJson(i)).toList();
+        lines = _linesFromJson(data);
+
+  static List<QuestionLine> _linesFromJson(Map<String, dynamic> data)
+  {
+    List<QuestionLine> list = new List<QuestionLine>();
+    for (var json in data['lines']){
+      var line = QuestionLine.fromJson(json);
+      list.add(line);
+    }
+
+    return list;
+  }
 }

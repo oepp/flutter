@@ -6,5 +6,16 @@ class QuestionLine {
   QuestionLine(this.items);
 
   QuestionLine.fromJson(Map<String, dynamic> data)
-      : items = data['items'].map((i) => QuestionItem.fromJson(i)).toList();
+      : items = _itemsFromJson(data);
+
+  static List<QuestionItem> _itemsFromJson(Map<String, dynamic> data)
+  {
+    List<QuestionItem> list = new List<QuestionItem>();
+    for (var json in data['items']){
+      var item = QuestionItem.fromJson(json);
+      list.add(item);
+    }
+
+    return list;
+  }
 }
