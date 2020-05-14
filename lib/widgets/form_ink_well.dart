@@ -13,10 +13,10 @@ class FormInkWell extends StatelessWidget {
     return InkWell(
       onTap: _onTap,
       highlightColor: ColorPalette.transparent,
-      splashColor: ColorPalette.clouds,
+      splashColor: ColorPalette.greenSea,
       child: Text(_text,
           style: TextStyle(
-            color: ColorPalette.amethyst,
+            color: ColorPalette.greenSea,
           )),
     );
   }

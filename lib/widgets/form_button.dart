@@ -14,11 +14,10 @@ class FormButton extends StatelessWidget {
       height: 50,
       width: double.infinity,
       child: RaisedButton(
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(10.0),
-            side: BorderSide(color: ColorPalette.amethyst)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0)),
         onPressed: _onPressed,
-        color: ColorPalette.amethyst,
+        color: ColorPalette.greenSea,
         textColor: ColorPalette.clouds,
         child: Text(_text),
       ),

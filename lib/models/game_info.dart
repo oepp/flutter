@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:oepp/utilities/image_utility.dart';
@@ -8,11 +9,11 @@ class GameInfo {
   final GameType type;
   final String title;
   final String description;
-  final Image image;
+  final Uint8List imageData;
   final String creator;
   final String creationTime;
 
-  GameInfo(this.id, this.type, this.title, this.description, this.image,
+  GameInfo(this.id, this.type, this.title, this.description, this.imageData,
       this.creator, this.creationTime);
 
   GameInfo.fromJson(Map<String, dynamic> data)
@@ -20,7 +21,7 @@ class GameInfo {
         type = GameType.fillInBlanks,
         title = data['GameTitle'],
         description = data['GameDescription'],
-        image = ImageUtility.fromJson(data['GameImage']),
+        imageData = ImageUtility.fromJson(data['GameImage']),
         creator = data['username'],
         creationTime = data['ReleaseTime'];
 }

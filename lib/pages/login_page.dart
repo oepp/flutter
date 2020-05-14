@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:oepp/pages/forgot_password_page.dart';
 import 'package:oepp/services/user_service.dart';
 import 'package:oepp/utilities/alert_utlity.dart';
+import 'package:oepp/utilities/color_palette.dart';
 import 'package:oepp/utilities/page_transition.dart';
 import 'package:oepp/pages/register_page.dart';
 import 'package:oepp/pages/home_page.dart';
@@ -21,7 +22,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorPalette.clouds,
         body: Center(
             child: SingleChildScrollView(
                 child: Padding(
