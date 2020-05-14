@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:get_it/get_it.dart';
+import 'package:oepp/models/game.dart';
 import 'package:oepp/models/game_info.dart';
 import 'package:oepp/models/question.dart';
 import 'api_service.dart';
@@ -23,14 +24,9 @@ class GameService {
     return infos;
   }
 
-  Future<List<Question>> getGameQuestions(int id) async {
+  Future<Game> getGame(int id) async {
     var data = await _apiService.get("games/files/$id");
-    var questions = List<Question>();
 
-    for (var json in data["data"]){
-      questions.add(Question.fromJson(json));
-    }
-
-    return questions;
+    return Game.fromJson(data);
   }
 }
