@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:oepp/utilities/color_palette.dart';
 import 'package:oepp/models/game_info.dart';
 import 'package:oepp/services/game_service.dart';
+import 'package:oepp/widgets/game_info_card.dart';
 
 class HomePage extends StatelessWidget {
   final GameService _gameService = new GameService();
@@ -34,29 +35,7 @@ class HomePage extends StatelessWidget {
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               children: snapshot.data
-                  .map((item) => Card(
-                        color: Colors.transparent,
-                        elevation: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: ColorPalette.alizarin),
-                          child: Transform.translate(
-                            offset: Offset(50, -50),
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 65, vertical: 63),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white),
-                              child: Icon(
-                                Icons.bookmark_border,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ))
+                  .map((item) => GameInfoCard(item))
                   .toList(),
             ))
           ];
