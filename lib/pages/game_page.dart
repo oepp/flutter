@@ -15,14 +15,25 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   final Game _game;
+  Map<String, String> _blankMap;
+  List<String> _draggedItems;
 
-  _GamePageState(this._game);
+  _GamePageState(this._game) {
+    _blankMap = Map<String, String>();
+    _draggedItems = _game.getCurrentQuestion().getBlankTexts()
+      ..shuffle(Random(1));
+
+    for (var item in _draggedItems){
+      _blankMap[item] = null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(_game.getStatus()), backgroundColor: ColorPalette.greenSea),
+          title: Text(_game.getStatus()),
+          backgroundColor: ColorPalette.greenSea),
       backgroundColor: ColorPalette.clouds,
       body: Column(
         children: [
@@ -41,7 +52,7 @@ class _GamePageState extends State<GamePage> {
                 return Row(
                     children: line.items.map((item) {
                   if (item.isBlank) {
-                    return QuestionItemSlot(item);
+                    return _createItemSlot(item.text);
                   }
 
                   return QuestionTextItem(item.text);
@@ -51,56 +62,48 @@ class _GamePageState extends State<GamePage> {
           Container(
               margin: EdgeInsets.all(10),
               child: Row(
-                children: _game
-                    .getCurrentQuestion()
-                    .getBlankItems()
-                    .map((item) => DraggableQuestionItem(item))
-                    .toList()..shuffle(Random(1)),
+                children: _draggedItems
+                    .map((item) => Draggable<String>(
+                        data: item,
+                        child: Container(
+                            margin: EdgeInsets.all(10),
+                            child: Text(
+                                _draggedItems.contains(item) ? item : "",
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    color: ColorPalette.midnightBlue))),
+                        feedback: Container(
+                            margin: EdgeInsets.all(10),
+                            child: Text(
+                                _draggedItems.contains(item) ? item : "",
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    color: ColorPalette.midnightBlue))),
+                        childWhenDragging: Container()))
+                    .toList(),
               )),
         ],
       ),
     );
   }
-}
 
-class QuestionItemSlot extends StatefulWidget {
-  final QuestionItem _item;
-
-  const QuestionItemSlot(this._item);
-
-  @override
-  State<StatefulWidget> createState() {
-    return _QuestionItemSlotState(_item);
-  }
-}
-
-class _QuestionItemSlotState extends State<QuestionItemSlot> {
-  final QuestionItem _item;
-  QuestionItem _receivedItem;
-
-  _QuestionItemSlotState(this._item);
-
-  @override
-  Widget build(BuildContext context) {
-    return DragTarget<QuestionItem>(
-      builder:
-          (BuildContext context, List<QuestionItem> incoming, List rejected) {
-        if (_receivedItem == null){
+  Widget _createItemSlot(String item) {
+    return DragTarget<String>(
+      builder: (BuildContext context, List<String> incoming, List rejected) {
+        if (_blankMap[item] == null) {
           return Container(
               height: 24, width: 50, color: ColorPalette.midnightBlue);
         }
 
-        return QuestionTextItem(_receivedItem.text);
+        return QuestionTextItem(_blankMap[item]);
       },
       onWillAccept: (data) {
         return true;
       },
       onAccept: (data) {
         setState(() {
-          _receivedItem = data;
-          if (_receivedItem.text == _item.text){
-            print("TRUE");
-          }
+          _draggedItems.remove(data);
+          _blankMap[item] = data;
         });
       },
       onLeave: (data) {},
@@ -116,28 +119,5 @@ class QuestionTextItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(_text, style: TextStyle(fontSize: 24));
-  }
-}
-
-class DraggableQuestionItem extends StatelessWidget {
-  final QuestionItem _item;
-
-  DraggableQuestionItem(this._item);
-
-  @override
-  Widget build(BuildContext context) {
-    return Draggable<QuestionItem>(
-        data: _item,
-        child: Container(
-            margin: EdgeInsets.all(10),
-            child: _item.isBlank == true
-                ? Text(_item.text, style: TextStyle(fontSize: 24, color: ColorPalette.midnightBlue))
-                : Container()),
-        feedback: Container(
-            margin: EdgeInsets.all(10),
-            child: _item.isBlank == true
-                ? Text(_item.text, style: TextStyle(fontSize: 24, color: ColorPalette.midnightBlue))
-                : Container()),
-        childWhenDragging: Container());
   }
 }

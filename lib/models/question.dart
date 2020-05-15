@@ -21,18 +21,18 @@ class Question {
     return list;
   }
 
-  List<QuestionItem> getBlankItems() {
-    List<QuestionItem> blankItems = List<QuestionItem>();
+  List<String> getBlankTexts() {
+    List<String> texts = List<String>();
 
     for (var line in lines) {
       for (var item in line.items) {
         if (item.isBlank) {
-          blankItems.add(item);
+          texts.add(item.text);
         }
       }
     }
 
-    return blankItems;
+    return texts;
   }
 
   bool isContainsItem(QuestionItem questionItem){
