@@ -24,7 +24,7 @@ class GameInfoCard extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10),
             child: Text(_gameInfo.title, style: TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: ColorPalette.clouds
             ), textAlign: TextAlign.center),
@@ -39,7 +39,7 @@ class GameInfoCard extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10),
             child: Text("Fill in the Blanks", style: TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 color: ColorPalette.clouds
             ),),
           )
