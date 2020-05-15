@@ -92,7 +92,7 @@ class _GamePageState extends State<GamePage> {
                                             left: 20, right: 20),
                                         child: Text(item,
                                             style: TextStyle(
-                                                fontSize: 28,
+                                                fontSize: 24,
                                                 color: ColorPalette.clouds))))
                                 : Container()),
                         feedback: Container(
@@ -103,7 +103,7 @@ class _GamePageState extends State<GamePage> {
                                         margin: EdgeInsets.only(
                                             left: 20, right: 20),
                                         child: Text(item,
-                                            style: TextStyle(fontSize: 28, color: ColorPalette.clouds))))
+                                            style: TextStyle(fontSize: 24, color: ColorPalette.clouds))))
                                 : Container()),
                         childWhenDragging: Container()))
                     .toList(),
@@ -149,11 +149,11 @@ class _GamePageState extends State<GamePage> {
           return Container(
               child: Text("____ ",
                   style:
-                      TextStyle(fontSize: 28, color: ColorPalette.greenSea)));
+                      TextStyle(fontSize: 24, color: ColorPalette.greenSea)));
         }
 
         return Text(_blankMap[item],
-            style: TextStyle(fontSize: 28, color: ColorPalette.greenSea));
+            style: TextStyle(fontSize: 24, color: ColorPalette.greenSea));
       },
       onWillAccept: (data) {
         return true;
@@ -176,6 +176,6 @@ class QuestionTextItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(_text, style: TextStyle(fontSize: 28));
+    return Text(_text, style: TextStyle(fontSize: 24));
   }
 }
