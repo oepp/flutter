@@ -1,6 +1,4 @@
 import 'dart:typed_data';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class ImageUtility {
   static Uint8List fromJson(Map<String, dynamic> data) {

@@ -1,3 +1,4 @@
+import 'package:oepp/models/question_item.dart';
 import 'package:oepp/models/question_line.dart';
 
 class Question {
@@ -8,5 +9,51 @@ class Question {
 
   Question.fromJson(Map<String, dynamic> data)
       : description = data['description'],
-        lines = data['lines'].map((i) => QuestionLine.fromJson(i)).toList();
+        lines = _linesFromJson(data);
+
+  static List<QuestionLine> _linesFromJson(Map<String, dynamic> data) {
+    List<QuestionLine> list = new List<QuestionLine>();
+    for (var json in data['lines']) {
+      var line = QuestionLine.fromJson(json);
+      list.add(line);
+    }
+
+    return list;
+  }
+
+  List<String> getBlankTexts() {
+    List<String> texts = List<String>();
+
+    for (var line in lines) {
+      for (var item in line.items) {
+        if (item.isBlank) {
+          texts.add(item.text);
+        }
+      }
+    }
+
+    return texts;
+  }
+
+  bool isContainsItem(QuestionItem questionItem){
+    for (var line in lines) {
+      for (var item in line.items){
+        if (item.text == questionItem.text){
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  void removeItem(QuestionItem questionItem) {
+    for (var line in lines) {
+      for (var item in line.items){
+        if (item.text == questionItem.text){
+          line.items.remove(questionItem);
+        }
+      }
+    }
+  }
 }
