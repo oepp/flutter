@@ -1,29 +1,33 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:oepp/models/game.dart';
-import 'package:oepp/models/question_item.dart';
+import 'package:oepp/models/game_info.dart';
+import 'package:oepp/pages/game_result_page.dart';
 import 'package:oepp/utilities/alert_utlity.dart';
 import 'package:oepp/utilities/color_palette.dart';
+import 'package:oepp/utilities/page_transition.dart';
 import 'package:oepp/widgets/game_button.dart';
 
 class GamePage extends StatefulWidget {
   final Game _game;
+  final GameInfo _gameInfo;
 
-  GamePage(this._game);
+  GamePage(this._game, this._gameInfo);
 
   @override
-  _GamePageState createState() => _GamePageState(_game);
+  _GamePageState createState() => _GamePageState(_game, _gameInfo);
 }
 
 class _GamePageState extends State<GamePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final Game _game;
+  final GameInfo _gameInfo;
   int _seed = 0;
   int _correctAnswers = 0;
   Map<String, String> _blankMap;
   List<String> _draggedItems;
 
-  _GamePageState(this._game) {
+  _GamePageState(this._game, this._gameInfo) {
     _blankMap = Map<String, String>();
     _init();
   }
@@ -125,7 +129,8 @@ class _GamePageState extends State<GamePage> {
                       }
 
                     if (_game.isOver()) {
-                      //Navigate to results
+                      Navigator.push(context,
+                          PageTransition(widget: GameResultPage(_gameInfo, _correctAnswers, _game.getTotalQuestions())));
                     } else {
                       _game.nextQuestion();
                       _init();

@@ -64,7 +64,7 @@ class GameInfoPage extends StatelessWidget {
           )),
           GameButton("Play", ColorPalette.greenSea, () {
             GetIt.instance<GameService>().getGame(_gameInfo.id).then((game) {
-              Navigator.push(context, PageTransition(widget: GamePage(game)));
+              Navigator.push(context, PageTransition(widget: GamePage(game, _gameInfo)));
             });
           })
         ],
