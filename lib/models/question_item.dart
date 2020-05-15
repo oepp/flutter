@@ -1,6 +1,6 @@
 class QuestionItem {
   final String text;
-  bool isBlank;
+  final bool isBlank;
 
   QuestionItem(this.text, this.isBlank);
 

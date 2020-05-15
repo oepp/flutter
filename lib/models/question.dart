@@ -34,4 +34,26 @@ class Question {
 
     return blankItems;
   }
+
+  bool isContainsItem(QuestionItem questionItem){
+    for (var line in lines) {
+      for (var item in line.items){
+        if (item.text == questionItem.text){
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  void removeItem(QuestionItem questionItem) {
+    for (var line in lines) {
+      for (var item in line.items){
+        if (item.text == questionItem.text){
+          line.items.remove(questionItem);
+        }
+      }
+    }
+  }
 }
