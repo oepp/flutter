@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:oepp/models/game.dart';
 import 'package:oepp/models/question_item.dart';
 import 'package:oepp/utilities/color_palette.dart';
+import 'package:oepp/widgets/game_button.dart';
 
 class GamePage extends StatefulWidget {
   final Game _game;
@@ -49,7 +50,7 @@ class _GamePageState extends State<GamePage> {
             child: Text(
                 "${_game.getCurrentQuestionNumber()}. ${_game.getCurrentQuestion().description}",
                 style:
-                    TextStyle(fontSize: 24, color: ColorPalette.midnightBlue),
+                    TextStyle(fontSize: 20, color: ColorPalette.midnightBlue),
                 textAlign: TextAlign.start),
           ),
           Container(
@@ -73,12 +74,12 @@ class _GamePageState extends State<GamePage> {
                     .map((item) => Draggable<String>(
                         data: item,
                         child: Container(
-                            margin: EdgeInsets.all(10),
-                            child: Text(
-                                _draggedItems.contains(item) ? item : "",
+                            child: _draggedItems.contains(item)
+                                ? Container(color: ColorPalette.greenSea, child: Container(margin: EdgeInsets.only(left: 20, right: 20),child: Text(item,
                                 style: TextStyle(
-                                    fontSize: 24,
-                                    color: ColorPalette.midnightBlue))),
+                                    fontSize: 28,
+                                    color: ColorPalette.clouds))))
+                                : Container()),
                         feedback: Container(
                             margin: EdgeInsets.all(10),
                             child: Text(
@@ -89,35 +90,16 @@ class _GamePageState extends State<GamePage> {
                         childWhenDragging: Container()))
                     .toList(),
               )),
-          Container(
-            height: 50,
-            width: double.infinity,
-            margin: EdgeInsets.all(10),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              onPressed: (_draggedItems.length > 0)
-                  ? null
-                  : () {
-                      setState(() {
-                        if (_game.isOver()) {
-                          //Navigate to results
-                        } else {
-                          _game.nextQuestion();
-                          _init();
-                        }
-                      });
-                    },
-              color: (_draggedItems.length > 0)
-                  ? ColorPalette.silver
-                  : ColorPalette.greenSea,
-              textColor: ColorPalette.clouds,
-              child: Text(
-                "Check",
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          )
+          (_draggedItems.length > 0) ? GameButton("Check", ColorPalette.silver, null) : GameButton("Check", ColorPalette.greenSea, () {
+            setState(() {
+              if (_game.isOver()) {
+                //Navigate to results
+              } else {
+                _game.nextQuestion();
+                _init();
+              }
+            });
+          })
         ],
       ),
     );
@@ -127,8 +109,7 @@ class _GamePageState extends State<GamePage> {
     return DragTarget<String>(
       builder: (BuildContext context, List<String> incoming, List rejected) {
         if (_blankMap[item] == null) {
-          return Container(
-              height: 24, width: 50, color: ColorPalette.midnightBlue);
+          return Container(child: Text("___ ", style: TextStyle(fontSize: 28, color: ColorPalette.greenSea)));
         }
 
         return QuestionTextItem(_blankMap[item]);
@@ -154,6 +135,6 @@ class QuestionTextItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(_text, style: TextStyle(fontSize: 24));
+    return Text(_text, style: TextStyle(fontSize: 28));
   }
 }

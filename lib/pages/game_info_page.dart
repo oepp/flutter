@@ -6,7 +6,7 @@ import 'package:oepp/pages/game_page.dart';
 import 'package:oepp/services/game_service.dart';
 import 'package:oepp/utilities/color_palette.dart';
 import 'package:oepp/utilities/page_transition.dart';
-import 'package:oepp/widgets/play_button.dart';
+import 'package:oepp/widgets/game_button.dart';
 
 class GameInfoPage extends StatelessWidget {
   final GameInfo _gameInfo;
@@ -62,7 +62,7 @@ class GameInfoPage extends StatelessWidget {
               ],
             ),
           )),
-          PlayButton(() {
+          GameButton("Play", ColorPalette.greenSea, () {
             GetIt.instance<GameService>().getGame(_gameInfo.id).then((game) {
               Navigator.push(context, PageTransition(widget: GamePage(game)));
             });
