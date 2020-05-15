@@ -1,12 +1,11 @@
 import 'package:oepp/models/question.dart';
 
 class Game {
-  List<Question> questions;
-
-  Game(this.questions);
+  List<Question> _questions;
+  int _currentQuestionIndex = 0;
 
   Game.fromJson(Map<String, dynamic> data)
-      : questions = _questionsFromJson(data);
+      : _questions = _questionsFromJson(data);
 
   static List<Question> _questionsFromJson(Map<String, dynamic> data)
   {
@@ -18,4 +17,10 @@ class Game {
 
     return list;
   }
+
+  Question getCurrentQuestion() => _questions[_currentQuestionIndex];
+
+  int getCurrentQuestionNumber() => _currentQuestionIndex + 1;
+
+  String getStatus() => "Question: ${getCurrentQuestionNumber()} / ${_questions.length}";
 }
