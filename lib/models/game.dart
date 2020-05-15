@@ -23,4 +23,10 @@ class Game {
   int getCurrentQuestionNumber() => _currentQuestionIndex + 1;
 
   String getStatus() => "Question: ${getCurrentQuestionNumber()} / ${_questions.length}";
+
+  bool isOver() => _currentQuestionIndex == _questions.length - 1;
+
+  void nextQuestion(){
+    _currentQuestionIndex++;
+  }
 }

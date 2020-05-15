@@ -15,15 +15,22 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   final Game _game;
+  int seed = 0;
   Map<String, String> _blankMap;
   List<String> _draggedItems;
 
   _GamePageState(this._game) {
     _blankMap = Map<String, String>();
-    _draggedItems = _game.getCurrentQuestion().getBlankTexts()
-      ..shuffle(Random(1));
+    _init();
+  }
 
-    for (var item in _draggedItems){
+  void _init() {
+    seed++;
+
+    _draggedItems = _game.getCurrentQuestion().getBlankTexts()
+      ..shuffle(Random(seed));
+
+    for (var item in _draggedItems) {
       _blankMap[item] = null;
     }
   }
@@ -82,6 +89,35 @@ class _GamePageState extends State<GamePage> {
                         childWhenDragging: Container()))
                     .toList(),
               )),
+          Container(
+            height: 50,
+            width: double.infinity,
+            margin: EdgeInsets.all(10),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              onPressed: (_draggedItems.length > 0)
+                  ? null
+                  : () {
+                      setState(() {
+                        if (_game.isOver()) {
+                          //Navigate to results
+                        } else {
+                          _game.nextQuestion();
+                          _init();
+                        }
+                      });
+                    },
+              color: (_draggedItems.length > 0)
+                  ? ColorPalette.silver
+                  : ColorPalette.greenSea,
+              textColor: ColorPalette.clouds,
+              child: Text(
+                "Check",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          )
         ],
       ),
     );
